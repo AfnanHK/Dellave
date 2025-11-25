@@ -122,6 +122,88 @@
         </div>
     </div>
 
+    <!-- Checkout Page -->
+    <div class="checkout-page" id="checkoutPage">
+        <div class="container">
+            <div class="checkout-header">
+                <button class="back-to-cart" id="backToCart">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Keranjang
+                </button>
+                <h1>Checkout</h1>
+            </div>
+
+            <div class="checkout-content">
+                <div class="checkout-form">
+                    <h2>Informasi Pembeli</h2>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label for="fullName">Nama Lengkap</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Alamat Lengkap</label>
+                            <textarea id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Kota</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Kode Pos</label>
+                            <input type="text" id="postalCode" required>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="order-summary">
+                    <h2>Ringkasan Pesanan</h2>
+                    <div class="order-items" id="orderItems">
+                        <!-- Order items will be dynamically loaded here -->
+                    </div>
+                    <div class="order-totals">
+                        <div class="order-total">
+                            <span>Subtotal:</span>
+                            <span id="orderSubtotal">Rp 0</span>
+                        </div>
+                        <div class="order-total">
+                            <span>Ongkos Kirim:</span>
+                            <span id="shippingCost">Rp 15.000</span>
+                        </div>
+                        <div class="order-total grand-total">
+                            <span>Total:</span>
+                            <span id="orderTotal">Rp 0</span>
+                        </div>
+                    </div>
+                    <button class="place-order-btn" id="placeOrderBtn">
+                        <i class="fas fa-check-circle"></i> Konfirmasi Pesanan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Pesanan Berhasil!</h2>
+            <p>Terima kasih atas pesanan Anda. Kami akan menghubungi Anda segera untuk konfirmasi pembayaran.</p>
+            <button class="continue-shopping-btn" id="continueShoppingBtn">
+                <i class="fas fa-shopping-bag"></i> Lanjutkan Belanja
+            </button>
+        </div>
+    </div>
+
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 

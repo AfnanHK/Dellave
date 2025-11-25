@@ -377,3 +377,146 @@ style.textContent = `
 `;
 
 document.head.appendChild(style);
+
+// DOM Elements for Checkout
+const checkoutPage = document.getElementById('checkoutPage');
+const backToCart = document.getElementById('backToCart');
+const checkoutForm = document.getElementById('checkoutForm');
+const placeOrderBtn = document.getElementById('placeOrderBtn');
+const orderItems = document.getElementById('orderItems');
+const orderSubtotal = document.getElementById('orderSubtotal');
+const orderTotal = document.getElementById('orderTotal');
+const successModal = document.getElementById('successModal');
+const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+
+// Setup Checkout Event Listeners
+function setupCheckoutEventListeners() {
+    // Checkout button in cart
+    document.querySelector('.checkout-btn').addEventListener('click', showCheckout);
+
+    // Back to cart button
+    backToCart.addEventListener('click', hideCheckout);
+
+    // Place order button
+    placeOrderBtn.addEventListener('click', processOrder);
+
+    // Continue shopping button
+    continueShoppingBtn.addEventListener('click', () => {
+        successModal.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+}
+
+// Show Checkout Page
+function showCheckout() {
+    if (cart.length === 0) {
+        showNotification('Keranjang belanja kosong!');
+        return;
+    }
+
+    // Hide cart and overlay
+    cartSidebar.classList.remove('active');
+    overlay.classList.remove('active');
+
+    // Show checkout page
+    checkoutPage.classList.add('active');
+
+    // Render order summary
+    renderOrderSummary();
+}
+
+// Hide Checkout Page
+function hideCheckout() {
+    checkoutPage.classList.remove('active');
+    cartSidebar.classList.add('active');
+    overlay.classList.add('active');
+}
+
+// Render Order Summary
+function renderOrderSummary() {
+    // Render order items
+    orderItems.innerHTML = cart.map(item => `
+        <div class="order-item">
+            <img src="${item.image}" alt="${item.name}" class="order-item-image">
+            <div class="order-item-info">
+                <h4 class="order-item-title">${item.name}</h4>
+                <p class="order-item-details">Ukuran: ${item.size} | Qty: ${item.quantity}</p>
+                <p class="order-item-price">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // Calculate totals
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shippingCost = 15000; // Fixed shipping cost
+    const total = subtotal + shippingCost;
+
+    // Update totals
+    orderSubtotal.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+    orderTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+}
+
+// Process Order
+function processOrder() {
+    // Validate form
+    const form = checkoutForm;
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // Get form data
+    const formData = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        postalCode: document.getElementById('postalCode').value
+    };
+
+    // Calculate totals
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shippingCost = 15000;
+    const total = subtotal + shippingCost;
+
+    // Create order object
+    const order = {
+        id: Date.now(), // Simple order ID
+        date: new Date().toISOString(),
+        customer: formData,
+        items: [...cart],
+        subtotal: subtotal,
+        shipping: shippingCost,
+        total: total,
+        status: 'Menunggu Pembayaran'
+    };
+
+    // In a real application, you would send this data to a server
+    console.log('Order placed:', order);
+
+    // Show success message
+    showNotification('Pesanan berhasil dibuat! Kami akan menghubungi Anda segera.');
+
+    // Clear cart
+    cart = [];
+    updateCartUI();
+
+    // Reset form
+    form.reset();
+
+    // Hide checkout page and show success modal
+    checkoutPage.classList.remove('active');
+    successModal.classList.add('active');
+    overlay.classList.add('active');
+
+    // You could redirect to a success page or show a success modal here
+}
+
+// Update the initialize function to include checkout event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    updateCartUI();
+    setupEventListeners();
+    setupCheckoutEventListeners(); // Add this line
+});
