@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dellave Party - Marketplace Baju & Celana</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Dellave Party</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link active" data-category="all">Semua</a>
+                    <a href="#" class="nav-link" data-category="baju">Baju</a>
+                    <a href="#" class="nav-link" data-category="celana">Celana</a>
+                </nav>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Cari produk...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Temukan Gaya Terbaikmu</h1>
+                    <p>Koleksi baju dan celana terkini dengan kualitas premium</p>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section class="products-section">
+                <h2 class="section-title">Produk Terbaru</h2>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="modalTitle"></h2>
+                    <p class="product-category" id="modalCategory"></p>
+                    <p class="product-price" id="modalPrice"></p>
+                    <p class="product-description" id="modalDescription"></p>
+                    <div class="product-options">
+                        <div class="size-selector">
+                            <label>Ukuran:</label>
+                            <div class="size-options">
+                                <button class="size-btn" data-size="S">S</button>
+                                <button class="size-btn" data-size="M">M</button>
+                                <button class="size-btn" data-size="L">L</button>
+                                <button class="size-btn" data-size="XL">XL</button>
+                            </div>
+                        </div>
+                        <div class="quantity-selector">
+                            <label>Jumlah:</label>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" id="decreaseQty">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="10">
+                                <button class="quantity-btn" id="increaseQty">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" id="addToCartModal">
+                        <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Keranjang Belanja</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rp 0</span>
+            </div>
+            <button class="checkout-btn">
+                <i class="fas fa-credit-card"></i> Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
